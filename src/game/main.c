@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "../scene/background.h"
 
 int main(void) {
     const int screenWidth = 800;
@@ -6,11 +7,7 @@ int main(void) {
 
     InitWindow(screenWidth, screenHeight, "bit-chess");
 
-    Texture2D image_board = LoadTexture("../../assets/board.png");        // Texture loading
-
-    Rectangle recSrc = {0, 0, image_board.width, image_board.height};
-    Rectangle recDest = {0, 0, screenWidth, screenHeight};
-    Vector2 origin = {0, 0};
+    setup_background(screenWidth, screenHeight);
 
     SetTargetFPS(60);
 
@@ -26,15 +23,13 @@ int main(void) {
 
             ClearBackground(RAYWHITE);
 
-            DrawTexturePro(image_board, recSrc, recDest, origin, 0, WHITE);
+            draw_background();
 
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
 
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    UnloadTexture(image_board);        // Texture unloading
+    unload_background();
 
     CloseWindow();                // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
