@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "../scene/background.h"
+#include "../scene/piece.h"
 
 int main(void) {
     const int screenWidth = 800;
@@ -8,6 +9,7 @@ int main(void) {
     InitWindow(screenWidth, screenHeight, "bit-chess");
 
     setup_background(screenWidth, screenHeight);
+    setup_pieces();
 
     SetTargetFPS(60);
 
@@ -24,12 +26,14 @@ int main(void) {
             ClearBackground(RAYWHITE);
 
             draw_background();
+            draw_pieces();
 
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
 
     unload_background();
+    unload_pieces();
 
     CloseWindow();                // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
