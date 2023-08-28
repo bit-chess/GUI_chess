@@ -6,7 +6,7 @@ int main(void) {
     const int screenWidth = 800;
     const int screenHeight = 800;
 
-    InitWindow(screenWidth, screenHeight, "bit-chess");
+    InitWindow(screenWidth, screenHeight, "bit-chess | Board Status");
 
     setup_background(screenWidth, screenHeight);
     setup_pieces();
