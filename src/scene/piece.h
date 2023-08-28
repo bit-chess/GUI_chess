@@ -7,7 +7,7 @@
 #define POS_Y_INITAL 70.0
 
 void setup_pieces(void);
-void draw_pieces(void);
+void draw_pieces(char board[8][8]);
 void unload_pieces(void);
 
 #endif
