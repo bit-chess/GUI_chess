@@ -1,1 +1,1 @@
-g++ scene/*.c  game/main.c -lCppLinuxSerial -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 && ./a.out
+g++ scene/*.c serial/*.c game/main.c -lCppLinuxSerial -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 && ./a.out
