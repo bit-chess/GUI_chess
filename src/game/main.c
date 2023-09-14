@@ -7,6 +7,10 @@
 #include <stdint.h>
 
 int main(void) {
+
+    open_serial();
+    setup_com();
+
     const int screenWidth = 800;
     const int screenHeight = 800;
 
@@ -16,9 +20,6 @@ int main(void) {
     setup_pieces();
 
     SetTargetFPS(60);
-
-    open_serial();
-    setup_com();
 
     char board[8][8];
 
