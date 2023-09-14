@@ -37,7 +37,7 @@ int main(void) {
         //----------------------------------------------------------------------------------
         
         
-        printf("\n-----------------\n");
+        printf("\n-----------------------\n");
         image_board buf;
         int size_read = read_data(&buf); 
         if(size_read == sizeof(image_board)){
@@ -49,7 +49,7 @@ int main(void) {
                 printf("\n");
             }
         } 
-        printf("\n-----------------\n");
+        printf("\n-----------------------\n");
 
         //analisa o último movimento
         find_movement_FSM(buf, HOW_MANY_PIECE);
