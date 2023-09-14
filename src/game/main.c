@@ -17,13 +17,12 @@ int main(void) {
     build_analyzer();
 
     movement curr_movement;
-    // last_movement = get_answer();
-    // curr_movement = last_movement;
+    char last_movement[110] = "";
 
     const int screenWidth = 800;
     const int screenHeight = 800;
 
-    InitWindow(screenWidth, screenHeight, "bit-chess | Board Status");
+    InitWindow(screenWidth, screenHeight + 100, "bit-chess | Board Status");
 
     setup_background(screenWidth, screenHeight);
     setup_pieces();
@@ -31,6 +30,7 @@ int main(void) {
     SetTargetFPS(60);
 
     char board[8][8];
+    int turn = 1;
 
     while (!WindowShouldClose()){
         // Update
@@ -54,8 +54,11 @@ int main(void) {
         //analisa o último movimento
         find_movement_FSM(buf, HOW_MANY_PIECE);
         curr_movement = get_answer();
-        if(curr_movement.x0 != curr_movement.xF || curr_movement.y0 != curr_movement.yF) printf("last movement: %s (%d, %d) -> (%d, %d)\n", curr_movement.movement_, curr_movement.x0, curr_movement.y0, curr_movement.xF, curr_movement.yF);
+        if((curr_movement.x0 != curr_movement.xF || curr_movement.y0 != curr_movement.yF) && (curr_movement.x0 != -1 && curr_movement.xF != -1 && curr_movement.y0 != -1 && curr_movement.yF != -1 )) {
+            sprintf(last_movement, "Last movement: %s (%d, %d) -> (%d, %d)\n", curr_movement.movement_, curr_movement.x0, curr_movement.y0, curr_movement.xF, curr_movement.yF);
+            printf("last movement: %s (%d, %d) -> (%d, %d)\n", curr_movement.movement_, curr_movement.x0, curr_movement.y0, curr_movement.xF, curr_movement.yF);
         
+        }
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -66,7 +69,12 @@ int main(void) {
 
             draw_background();
             draw_pieces(board);
-
+            
+            DrawRectangle(0, screenHeight, screenWidth, screenHeight + 100, Fade(ORANGE, 0.5f));
+            DrawRectangleLines(0, screenHeight, screenWidth, screenHeight + 100, ORANGE);
+            DrawText(last_movement, 10, screenHeight + 10, 20, DARKGRAY);
+            DrawText((turn) ? "White turn" : "Black turn", 10, screenHeight + 50, 20, DARKGRAY);
+            
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
