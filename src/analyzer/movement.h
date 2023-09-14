@@ -16,5 +16,6 @@ int counter_piece(image_board board);
 void analyzer(void);
 void find_movement_FSM(image_board curr_board, int how_many_piece);
 movement get_answer(void);
+int is_a_movement_equals(movement a, movement b);
 
 #endif

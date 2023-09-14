@@ -2,14 +2,23 @@
 #include "../scene/background.h"
 #include "../scene/piece.h"
 #include "../serial/serial_com.h"
+#include "../analyzer/movement.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+
+#define HOW_MANY_PIECE 2
 
 int main(void) {
 
     open_serial();
     setup_com();
+
+    build_analyzer();
+
+    movement last_movement, curr_movement;
+    last_movement = get_answer();
+    curr_movement = last_movement;
 
     const int screenWidth = 800;
     const int screenHeight = 800;
@@ -26,10 +35,12 @@ int main(void) {
     while (!WindowShouldClose()){
         // Update
         //----------------------------------------------------------------------------------
+        
+        
         printf("\n-----------------\n");
         image_board buf;
-        int n = read_data(&buf); 
-        if(n == sizeof(image_board)){
+        int size_read = read_data(&buf); 
+        if(size_read == sizeof(image_board)){
             for(int i=0;i<8;i++) {
                 for(int j=0;j<8;j++){
                     board[i][j] = buf.board[i][j];
@@ -39,6 +50,14 @@ int main(void) {
             }
         } 
         printf("\n-----------------\n");
+
+        //analisa o último movimento
+        find_movement_FSM(buf, HOW_MANY_PIECE);
+        curr_movement = get_answer();
+        if(!is_a_movement_equals(last_movement, curr_movement)){
+            printf("%s\n", curr_movement.movement_);
+            last_movement = curr_movement;
+        }
         //----------------------------------------------------------------------------------
 
         // Draw

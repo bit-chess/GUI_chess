@@ -69,3 +69,7 @@ void find_movement_FSM(image_board curr_board, int how_many_piece){
 movement get_answer(void){
     return ans;
 }
+
+int is_a_movement_equals(movement a, movement b){
+    return (a.x0 == b.x0 && a.y0 == b.y0 && a.xF == b.xF && a.yF == b.yF && !strcmp(a.movement_, b.movement_));
+}
