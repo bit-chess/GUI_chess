@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdint.h>
 
-#define HOW_MANY_PIECE 2
+#define HOW_MANY_PIECE 1
 
 int main(void) {
 
@@ -16,9 +16,9 @@ int main(void) {
 
     build_analyzer();
 
-    movement last_movement, curr_movement;
-    last_movement = get_answer();
-    curr_movement = last_movement;
+    movement curr_movement;
+    // last_movement = get_answer();
+    // curr_movement = last_movement;
 
     const int screenWidth = 800;
     const int screenHeight = 800;
@@ -54,10 +54,8 @@ int main(void) {
         //analisa o último movimento
         find_movement_FSM(buf, HOW_MANY_PIECE);
         curr_movement = get_answer();
-        if(!is_a_movement_equals(last_movement, curr_movement)){
-            printf("%s\n", curr_movement.movement_);
-            last_movement = curr_movement;
-        }
+        if(curr_movement.x0 != curr_movement.xF || curr_movement.y0 != curr_movement.yF) printf("last movement: %s (%d, %d) -> (%d, %d)\n", curr_movement.movement_, curr_movement.x0, curr_movement.y0, curr_movement.xF, curr_movement.yF);
+        
         //----------------------------------------------------------------------------------
 
         // Draw

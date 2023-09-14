@@ -26,7 +26,7 @@ int counter_piece(image_board board){
     return acc;
 }
 
-void analyzer(void){
+int analyzer(void){
     for(int i = 0; i < 8; i++) {
         for(int j = 0; j < 8; j++) {
             if(initial_image.board[i][j] != final_image.board[i][j]){
@@ -42,7 +42,9 @@ void analyzer(void){
             
         }
     }
-    sprintf(ans.movement_, "%c%d%c%d", letters[ans.x0], numbers[ans.y0], letters[ans.xF], numbers[ans.yF]);
+    if(ans.x0 == ans.xF && ans.y0 == ans.yF && (ans.x0 != -1 || ans.y0 != -1 || ans.xF != -1 || ans.yF != -1)) return 0;
+    sprintf(ans.movement_, "%c%d%c%d", get_letter(ans.y0), number_letter(ans.x0), get_letter(ans.yF), number_letter(ans.xF));
+    return 1;
 }
 
 void find_movement_FSM(image_board curr_board, int how_many_piece){
@@ -59,8 +61,7 @@ void find_movement_FSM(image_board curr_board, int how_many_piece){
 
         case 2:
             final_image = curr_board;
-            analyzer();
-            sequential_flag = 0;
+            if(analyzer()) sequential_flag = 0;
             break;
         
     }
@@ -72,4 +73,13 @@ movement get_answer(void){
 
 int is_a_movement_equals(movement a, movement b){
     return (a.x0 == b.x0 && a.y0 == b.y0 && a.xF == b.xF && a.yF == b.yF && !strcmp(a.movement_, b.movement_));
+}
+
+char get_letter(int x){
+    if(x != -1) return letters[x];
+    return 'X';
+}
+int number_letter(int x){
+    if(x != -1) return numbers[x];
+    return 9;
 }

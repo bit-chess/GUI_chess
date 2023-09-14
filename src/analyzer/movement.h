@@ -13,9 +13,11 @@ const int numbers[] = {8,7,6,5,4,3,2,1};
 
 void build_analyzer(void);
 int counter_piece(image_board board);
-void analyzer(void);
+int analyzer(void);
 void find_movement_FSM(image_board curr_board, int how_many_piece);
 movement get_answer(void);
 int is_a_movement_equals(movement a, movement b);
+char get_letter(int x);
+int number_letter(int x);
 
 #endif
